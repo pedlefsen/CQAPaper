@@ -1,3 +1,4 @@
+library( "ggplot2" )
 the.results <- read.csv( "Abrahams-2009aa-results.csv" )
 # Those results had not been made with a set threshold so the Profillic calls are not right.  Looking at it, a threshold of 20 works well to match their multiplicity count.
 
@@ -6,6 +7,7 @@ ggplot( data=data.frame( the.results ), aes ( the.results$pEntropy ) ) + geom_hi
 dev.off();
 
 the.results[ , "Profillic" ] <- ifelse( as.numeric( the.results[ , "pEntropy" ] ) < 20, "1", the.results[ , "Profillic_nent" ] );
+#write.csv( the.results, file = "Abrahams-2009aa-results-withCorrectProfillicCalls.csv", row.names = FALSE )
 
 print( xtable( the.results ), include.rownames = FALSE );
 # % latex table generated in R 3.1.2 by xtable 1.7-4 package
